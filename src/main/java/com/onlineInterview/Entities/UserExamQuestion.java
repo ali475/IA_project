@@ -14,7 +14,7 @@ public class UserExamQuestion {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
-	private float questionMark;
+	private boolean questionMark;
 	
 	@ManyToOne
     @JoinColumn(name = "userExam_id")
@@ -23,31 +23,14 @@ public class UserExamQuestion {
 	@ManyToOne
     @JoinColumn(name = "question_id")
 	private Question userQuestion;
-	private String state;
+	
 	
 	public UserExamQuestion() {}
 
-	public UserExamQuestion(UserExam userExam, Question userQuestion,String state) {
+	public UserExamQuestion(UserExam userExam, Question userQuestion) {
 		super();
 		this.userExam = userExam;
 		this.userQuestion = userQuestion;
-		this.state = state;
-	}
-	
-	public Question getUserQuestion() {
-		return userQuestion;
-	}
-
-	public void setUserQuestion(Question userQuestion) {
-		this.userQuestion = userQuestion;
-	}
-
-	public String getState() {
-		return state;
-	}
-
-	public void setState(String state) {
-		this.state = state;
 	}
 
 	public int getId() {
@@ -58,11 +41,11 @@ public class UserExamQuestion {
 		this.id = id;
 	}
 
-	public float getQuestionMark() {
+	public boolean getQuestionMark() {
 		return questionMark;
 	}
 
-	public void setQuestionMark(float questionMark) {
+	public void setQuestionMark(boolean questionMark) {
 		this.questionMark = questionMark;
 	}
 
@@ -81,8 +64,6 @@ public class UserExamQuestion {
 	public void setQuestion(Question question) {
 		this.userQuestion = question;
 	}
-
-	
 	
 
 }

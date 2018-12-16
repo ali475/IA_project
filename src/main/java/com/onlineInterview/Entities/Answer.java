@@ -1,7 +1,5 @@
 package com.onlineInterview.Entities;
 
-import java.util.Set;
-
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -21,7 +19,7 @@ public class Answer {
 	private boolean state;
 	
 	@ManyToOne
-    @JoinColumn(name = "q_id")
+    @JoinColumn(name = "question_id")
 	private Question question;
 	
 	public Answer() {}
@@ -64,8 +62,6 @@ public class Answer {
 	public void setQuestion(Question question) {
 		this.question = question;
 	}
-
-	
 	
 
 }

@@ -10,7 +10,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 
 @Entity
 public class UserExam {
@@ -27,23 +26,22 @@ public class UserExam {
 	private int numOfQuestions;
 	private float totalScore;
 	private String examType;
-	@OneToOne
-	@JoinColumn(name = "pre_id")
-	private UserExam pre_exam;
+	
+	@OneToMany(mappedBy = "exam", cascade = CascadeType.ALL)
+	private Set<PreExam> preExams;
 	
 	@OneToMany(mappedBy = "userExam", cascade = CascadeType.ALL)
 	private Set<UserExamQuestion> userExamQuestions;
 	
 	public UserExam() {}
 
-	public UserExam(Interview iv, int duration, int numOfQuestions, float totalScore, String examType, UserExam pre) {
+	public UserExam(Interview iv, int duration, int numOfQuestions, float totalScore, String examType) {
 		super();
 		this.iv = iv;
 		this.duration = duration;
 		this.numOfQuestions = numOfQuestions;
 		this.totalScore = totalScore;
 		this.examType = examType;
-		pre_exam= pre;
 	}
 
 	public int getId() {
@@ -94,6 +92,13 @@ public class UserExam {
 		this.examType = examType;
 	}
 
+	public Set<PreExam> getPreExams() {
+		return preExams;
+	}
+
+	public void setPreExams(Set<PreExam> preExams) {
+		this.preExams = preExams;
+	}
 
 	public Set<UserExamQuestion> getUserExamQuestions() {
 		return userExamQuestions;
