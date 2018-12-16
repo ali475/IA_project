@@ -21,10 +21,7 @@ public class Candidate {
 	@OneToMany(mappedBy = "candidate", cascade = CascadeType.ALL)
 	Set<Interview> interviews;
 	
-	@OneToMany(mappedBy = "candidate", cascade = CascadeType.ALL)
-	Set<Notification> notifications;
-
-
+	
 	public Candidate() {}
 
 
@@ -112,20 +109,6 @@ public class Candidate {
 
 	public void setInterviews(Set<Interview> interviews) {
 		this.interviews = interviews;
-	}
-
-
-
-	public Set<Notification> getNotifications() {
-		return notifications;
-	}
-
-
-
-	public void setNotifications(Set<Notification> notifications) {
-		this.notifications = notifications;
-	}
-	
-	
+	}	
 
 }

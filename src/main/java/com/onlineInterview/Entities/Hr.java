@@ -18,8 +18,7 @@ public class Hr {
 	@OneToMany(mappedBy = "hr", cascade = CascadeType.ALL)
 	Set<Interview> interviews;
 	
-	@OneToMany(mappedBy = "hr", cascade = CascadeType.ALL)
-	Set<Notification> notifications;
+	
 	
 	public Hr() {}
 
@@ -72,14 +71,6 @@ public class Hr {
 	}
 
 
-	public Set<Notification> getNotifications() {
-		return notifications;
-	}
-
-
-	public void setNotifications(Set<Notification> notifications) {
-		this.notifications = notifications;
-	}
 	
 
 }

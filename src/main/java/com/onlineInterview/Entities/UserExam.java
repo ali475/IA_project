@@ -27,8 +27,6 @@ public class UserExam {
 	private float totalScore;
 	private String examType;
 	
-	@OneToMany(mappedBy = "exam", cascade = CascadeType.ALL)
-	private Set<PreExam> preExams;
 	
 	@OneToMany(mappedBy = "userExam", cascade = CascadeType.ALL)
 	private Set<UserExamQuestion> userExamQuestions;
@@ -92,13 +90,6 @@ public class UserExam {
 		this.examType = examType;
 	}
 
-	public Set<PreExam> getPreExams() {
-		return preExams;
-	}
-
-	public void setPreExams(Set<PreExam> preExams) {
-		this.preExams = preExams;
-	}
 
 	public Set<UserExamQuestion> getUserExamQuestions() {
 		return userExamQuestions;

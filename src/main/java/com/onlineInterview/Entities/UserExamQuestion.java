@@ -23,18 +23,31 @@ public class UserExamQuestion {
 	@ManyToOne
     @JoinColumn(name = "question_id")
 	private Question userQuestion;
-	
-	@ManyToOne
-    @JoinColumn(name = "userAnswer_id")
-	private Answer userAnswer;
+	private String state;
 	
 	public UserExamQuestion() {}
 
-	public UserExamQuestion(UserExam userExam, Question userQuestion, Answer userAnswer) {
+	public UserExamQuestion(UserExam userExam, Question userQuestion,String state) {
 		super();
 		this.userExam = userExam;
 		this.userQuestion = userQuestion;
-		this.userAnswer = userAnswer;
+		this.state = state;
+	}
+	
+	public Question getUserQuestion() {
+		return userQuestion;
+	}
+
+	public void setUserQuestion(Question userQuestion) {
+		this.userQuestion = userQuestion;
+	}
+
+	public String getState() {
+		return state;
+	}
+
+	public void setState(String state) {
+		this.state = state;
 	}
 
 	public int getId() {
@@ -69,13 +82,6 @@ public class UserExamQuestion {
 		this.userQuestion = question;
 	}
 
-	public Answer getUserAnswer() {
-		return userAnswer;
-	}
-
-	public void setUserAnswer(Answer userAnswer) {
-		this.userAnswer = userAnswer;
-	}
 	
 	
 

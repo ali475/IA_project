@@ -2,14 +2,13 @@ package com.onlineInterview.Entities;
 
 import java.util.Set;
 
-import javax.persistence.CascadeType;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 
 @Entity
 public class Answer {
@@ -22,11 +21,8 @@ public class Answer {
 	private boolean state;
 	
 	@ManyToOne
-    @JoinColumn(name = "question_id")
+    @JoinColumn(name = "q_id")
 	private Question question;
-	
-	@OneToMany(mappedBy = "userAnswer", cascade = CascadeType.ALL)
-	private Set<UserExamQuestion> userExamQuestions;
 	
 	public Answer() {}
 
@@ -69,13 +65,6 @@ public class Answer {
 		this.question = question;
 	}
 
-	public Set<UserExamQuestion> getUserExamQuestions() {
-		return userExamQuestions;
-	}
-
-	public void setUserExamQuestions(Set<UserExamQuestion> userExamQuestions) {
-		this.userExamQuestions = userExamQuestions;
-	}
 	
 	
 
