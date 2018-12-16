@@ -64,15 +64,6 @@ public class Hr {
 		this.interviews = interviews;
 	}
 
-
-	public Set<Notification> getNotifications() {
-		return notifications;
-	}
-
-
-	public void setNotifications(Set<Notification> notifications) {
-		this.notifications = notifications;
-	}
 	
 
 }
