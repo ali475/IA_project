@@ -18,11 +18,7 @@ public class Hr {
 	@OneToMany(mappedBy = "hr", cascade = CascadeType.ALL)
 	Set<Interview> interviews;
 	
-	@OneToMany(mappedBy = "hr", cascade = CascadeType.ALL)
-	Set<Notification> notifications;
-	
 	public Hr() {}
-
 
 	public Hr(String userName, String email, String password) {
 		super();
@@ -36,11 +32,9 @@ public class Hr {
 		return userName;
 	}
 
-
 	public void setUserName(String userName) {
 		this.userName = userName;
 	}
-
 
 	public String getEmail() {
 		return email;
@@ -50,7 +44,6 @@ public class Hr {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-
 
 	public String getPassword() {
 		return password;
