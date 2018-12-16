@@ -1,6 +1,7 @@
 package com.onlineInterview.Controllers;
 
 import java.util.Date;
+import java.util.HashMap;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -32,7 +33,7 @@ public class MainController {
 	}
 
 	@GetMapping("/insert")
-	public void test1(HttpServletRequest req) {
+	public HashMap<String, Object> test1(HttpServletRequest req) {
 		Candidate c = new Candidate("abdo", "122", "mail--", "pass1", "cvLink", false);
 		Hr hr = new Hr("ahmed fathi", "mail1", "hr_pass");
 		canRepo.save(c);
@@ -48,6 +49,9 @@ public class MainController {
 		
 		ivRepo.save(iv);
 		ivRepo.save(iv2);
+		HashMap<String, Object>result = new HashMap<>() ;
+		result.put("ali", "20150167");
+		return result;
 		
 	}
 	
