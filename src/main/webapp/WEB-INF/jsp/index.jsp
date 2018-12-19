@@ -15,7 +15,7 @@
 				return false;
 			}
 		}
-		function AJAX() 
+		function AJAXmail() 
 	    {
             var xhttp;
             var email = document.getElementById("email").value;
