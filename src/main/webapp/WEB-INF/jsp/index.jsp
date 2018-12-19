@@ -32,7 +32,7 @@
 	</script>
 </head>
 <body>
-	<form name="myForm">
+	<form name="myForm" action="login">
 		Email:<input type="email" name="email" id="email" required="true" onchange="AJAXmail()"><div id="exist"></div>
 		<input type="radio" name="login" id="login" value="a"> Applicant
 	    <input type="radio" name="login" id="login"  value="h"> HR <br>
