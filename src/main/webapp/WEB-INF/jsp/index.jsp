@@ -27,7 +27,7 @@
             {
             	if (this.readyState == 4 && this.status == 200) 
                 	document.getElementById("exist").innerHTML = this.responseText;
-        };}
+        };} 
 	</script>
 </head>
 <body>
