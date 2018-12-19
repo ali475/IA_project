@@ -42,7 +42,6 @@ public String test (@RequestParam("email") String email,@RequestParam("type")Str
 	}
 	else {
 		return "not exests ";
-		
 	}
 }
 }
