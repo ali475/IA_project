@@ -33,6 +33,7 @@ public class MainController {
 	}
 	@GetMapping("/shit")
 	public String test (HttpServletRequest req) {
+		req.setAttribute("test", "this is from the shit url");
 		return "welcome";
 	}
 	@GetMapping("/insert")

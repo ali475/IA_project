@@ -1,4 +1,4 @@
-<<!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -10,5 +10,9 @@
 </head>
 <body>
     <%= "this is the test page "%>
+    <%
+    String text = (String)request.getAttribute("test");
+    %>
+    <%= text %>
 </body>
 </html>
