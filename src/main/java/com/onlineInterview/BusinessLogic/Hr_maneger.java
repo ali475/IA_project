@@ -17,7 +17,7 @@ public class Hr_maneger  extends Account_Manager<Hr>{
 	}
 
 	
-	public boolean regester(Hr user) {
+	public boolean register(Hr user) {
 		Hr getuser = Hr_db.findById(user.getUserName()).get();
 		if (getuser==null) {
 			Hr_db.save(user);
