@@ -58,7 +58,10 @@ public class MainController {
 		return result;
 		
 	}
-	
+	@GetMapping("/index")
+	public String index (HttpServletRequest req) {
+		return"index";
+	}
 	@GetMapping("/read")
 	public void test2(HttpServletRequest req) {
 		
