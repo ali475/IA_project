@@ -4,7 +4,7 @@
 	<title>Main HR</title>
 </head>
 <body>
-	<a href="applicants.html"><input type="submit" value="Applicants"></a><br>
-	<a href="search.html"><input type="submit" value="search"></a>
+	<a href="positions.jsp"><input type="submit" value="Available positions"></a><br>
+	<a href="myapplications.jsp"><input type="submit" value="My applications"></a>
 </body>
-</html>  
+</html>
