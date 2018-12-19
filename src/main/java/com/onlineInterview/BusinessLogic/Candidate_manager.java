@@ -10,6 +10,7 @@ import com.onlineInterview.Repositories.CandidateRepository;
 public class Candidate_manager extends Account_Manager<Candidate>{
 	@Autowired
 	private CandidateRepository candidatedb;
+	
 	@Override
 	public boolean login(String user_name, String password) {
 		Candidate user = candidatedb.findById(user_name).get();
@@ -21,7 +22,7 @@ public class Candidate_manager extends Account_Manager<Candidate>{
 	}
 
 	@Override
-	public boolean regester(Candidate user) {
+	public boolean register(Candidate user) {
 		Candidate getuser = candidatedb.findById(user.getUserNAme()).get();
 		if (getuser==null) {
 			candidatedb.save(user);
