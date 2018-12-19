@@ -18,9 +18,10 @@
 		function AJAX() 
 	    {
             var xhttp;
-            var name = document.getElementById("email").value;
+            var email = document.getElementById("email").value;
+            var type = document.getElementById("login").value;
             xhttp = new XMLHttpRequest();
-            xhttp.open("GET", "java_page_name?email=" + email, true);
+            xhttp.open("GET", "java_page_name?email=" + email+"&type="+ type, true);
             xhttp.send();
             xhttp.onreadystatechange = function ()
             {
@@ -31,7 +32,9 @@
 </head>
 <body>
 	<form name="myForm">
-		Email:<input type="email" name="email" id="email" required="true" onchange="AJAXmail()"><br>
+		Email:<input type="email" name="email" id="email" required="true" onchange="AJAXmail()"><div id="exist"></div>
+		<input type="radio" name="login" id="login" value="a"> Applicant
+	    <input type="radio" name="login" id="login"  value="h"> HR <br>
 		Password:<input type="password" name="password" id="password" required="true"><br>
 		<input type="submit" value="Login" onclick="validate(document.myForm.email)">
 	</form>
