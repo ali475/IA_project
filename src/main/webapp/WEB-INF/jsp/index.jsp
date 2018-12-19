@@ -19,7 +19,7 @@
 	    {
             var xhttp;
             var email = document.getElementById("email").value;
-            var type = document.getElementById("login").value;
+            var type = document.getElementById("type").value;
             xhttp = new XMLHttpRequest();
             xhttp.open("GET", "testemail?email="+ email+"&type="+ type, true);
             xhttp.send();
@@ -34,8 +34,8 @@
 <body>
 	<form name="myForm" action="login">
 		Email:<input type="email" name="email" id="email" required="true" onchange="AJAXmail()"><div id="exist"></div>
-		<input type="radio" name="login" id="login" value="a"> Applicant
-	    <input type="radio" name="login" id="login"  value="h"> HR <br>
+		<input type="radio" name="type" id="type" value="a"> Applicant
+	    <input type="radio" name="type" id="type"  value="h"> HR <br>
 		Password:<input type="password" name="password" id="password" required="true"><br>
 		<input type="submit" value="Login" onclick="validate(document.myForm.email)">
 	</form>
