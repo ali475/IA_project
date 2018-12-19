@@ -15,11 +15,23 @@
 				return false;
 			}
 		}
+		function AJAX() 
+	    {
+            var xhttp;
+            var name = document.getElementById("email").value;
+            xhttp = new XMLHttpRequest();
+            xhttp.open("GET", "java_page_name?email=" + email, true);
+            xhttp.send();
+            xhttp.onreadystatechange = function ()
+            {
+            	if (this.readyState == 4 && this.status == 200) 
+                	document.getElementById("exist").innerHTML = this.responseText;
+        };
 	</script>
 </head>
 <body>
 	<form name="myForm">
-		Email:<input type="email" name="email" id="email" required="true"><br>
+		Email:<input type="email" name="email" id="email" required="true" onchange="AJAXmail()"><br>
 		Password:<input type="password" name="password" id="password" required="true"><br>
 		<input type="submit" value="Login" onclick="validate(document.myForm.email)">
 	</form>
