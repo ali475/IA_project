@@ -31,7 +31,10 @@ public class MainController {
 	public MainController() {
 		// TODO Auto-generated constructor stub
 	}
-
+	@GetMapping("/shit")
+	public String test (HttpServletRequest req) {
+		return "welcome";
+	}
 	@GetMapping("/insert")
 	public HashMap<String, Object> test1(HttpServletRequest req) {
 		Candidate c = new Candidate("abdo", "122", "mail--", "pass1", "cvLink", false);
