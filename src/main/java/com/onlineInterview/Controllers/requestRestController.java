@@ -45,4 +45,5 @@ public String test (@RequestParam("email") String email,@RequestParam("type")Str
 		
 	}
 }
+
 }

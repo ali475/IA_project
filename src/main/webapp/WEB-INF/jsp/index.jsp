@@ -21,7 +21,7 @@
             var email = document.getElementById("email").value;
             var type = document.getElementById("login").value;
             xhttp = new XMLHttpRequest();
-            xhttp.open("GET", "java_page_name?email=" + email+"&type="+ type, true);
+            xhttp.open("GET", "testemail?email=" + email+"&type="+ type, true);
             xhttp.send();
             xhttp.onreadystatechange = function ()
             {
