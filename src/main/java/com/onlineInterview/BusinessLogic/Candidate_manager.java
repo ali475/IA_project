@@ -31,4 +31,9 @@ public class Candidate_manager extends Account_Manager<Candidate>{
 		return false;
 	}
 
+	public boolean isExests(String email) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
 }

@@ -27,4 +27,10 @@ public class Hr_maneger  extends Account_Manager<Hr>{
 		
 	}
 
+
+	public boolean isExests(String email) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
 }
