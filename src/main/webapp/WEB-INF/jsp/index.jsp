@@ -21,13 +21,13 @@
             var email = document.getElementById("email").value;
             var type = document.getElementById("login").value;
             xhttp = new XMLHttpRequest();
-            xhttp.open("GET", "testemail?email=" + email+"&type="+ type, true);
+            xhttp.open("GET", "testemail?email="+ email+"&type="+ type, true);
             xhttp.send();
             xhttp.onreadystatechange = function ()
             {
             	if (this.readyState == 4 && this.status == 200) 
                 	document.getElementById("exist").innerHTML = this.responseText;
-        };
+        };}
 	</script>
 </head>
 <body>
