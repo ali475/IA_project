@@ -9,11 +9,16 @@ public class Hr_maneger  extends Account_Manager<Hr>{
 	@Autowired
 	HrRepository Hr_db;
 	public boolean login(String user_name, String password) {
-		Hr user = Hr_db.findById(user_name).get();
-		if (user==null|| !user.getPassword().equals(password)) {
-			return false ;
+		boolean test = Hr_db.existsById(user_name);
+		if (test) {
+			Hr getuser = Hr_db.findById(user_name).get();
+			if (getuser.getPassword().equals(password))
+				return true;
+			else {
+				return false;
+			}
 		}
-		return true;
+		return false;
 	}
 
 	
@@ -30,7 +35,7 @@ public class Hr_maneger  extends Account_Manager<Hr>{
 
 	public boolean isExests(String email) {
 		// TODO Auto-generated method stub
-		return false;
+		return  Hr_db.existsById(email);
 	}
 
 }

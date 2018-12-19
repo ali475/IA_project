@@ -13,12 +13,16 @@ public class Candidate_manager extends Account_Manager<Candidate>{
 	
 	@Override
 	public boolean login(String user_name, String password) {
-		Candidate user = candidatedb.findById(user_name).get();
-		if (user==null|| !user.getPassword().equals(password)) {
-			return false ;
+		boolean result = candidatedb.existsById(user_name);
+		if (result) {
+			Candidate getuser = candidatedb.findById(user_name).get();
+			if (getuser.getPassword().equals(password)) {
+				return true;
+			}else {
+				return false;
+			}
 		}
-		
-		return true;
+		return false;
 	}
 
 	@Override
@@ -33,7 +37,7 @@ public class Candidate_manager extends Account_Manager<Candidate>{
 
 	public boolean isExests(String email) {
 		// TODO Auto-generated method stub
-		return false;
+		return candidatedb.existsById(email);
 	}
 
 }

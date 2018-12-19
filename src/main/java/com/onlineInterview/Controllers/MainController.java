@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.onlineInterview.BusinessLogic.*;
 @Controller
@@ -37,23 +38,25 @@ public class MainController {
 	
 	@GetMapping ("/login")
 	public String test (@RequestParam("email") String email,
-			@RequestParam("pass") String password,
+			@RequestParam("password") String password,
 			@RequestParam("type")String type
 			,HttpServletRequest request) {
 		if(type.equals("h")) {
 			boolean result = Hr_maneger.login(email, password);
+			result =true;
 			if (result) {
-				return "";
+				return "mainHR";
 			}
 			else {
-			return "not exests";	
+			return "index";	
 			}
 			
 		}
 		else if (type.equals("a")) {
-			boolean result = Candidate_manager.login(email, password);
+			boolean result ; //Candidate_manager.login(email, password);
+			result =true;
 			if (result) {
-				return "";
+				return "mainApplicant";
 			}
 			else {
 			return "not exests";	
