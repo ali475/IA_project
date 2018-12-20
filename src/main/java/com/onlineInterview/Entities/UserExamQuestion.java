@@ -2,6 +2,7 @@ package com.onlineInterview.Entities;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -17,11 +18,11 @@ public class UserExamQuestion {
 	
 	private boolean questionMark;
 	
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "userExam_id")
 	private UserExam userExam;
 	
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "question_id")
 	private Question userQuestion;
 	@Column(columnDefinition="text")
