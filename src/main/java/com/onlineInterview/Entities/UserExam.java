@@ -29,7 +29,7 @@ public class UserExam {
 	private float totalScore;
 	private String examType;
 	
-	@OneToOne
+	@OneToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name="p_e_id")
 	UserExam PreExam ;
 	boolean finished;

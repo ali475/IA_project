@@ -2,9 +2,11 @@ package com.onlineInterview.Controllers;
 
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.aspectj.internal.lang.annotation.ajcDeclareAnnotation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.onlineInterview.BusinessLogic.*;
 import com.onlineInterview.Entities.Candidate;
+import com.onlineInterview.Entities.Position;
 import com.onlineInterview.Repositories.CandidateRepository;
 @Controller
 public class MainController {
@@ -22,13 +25,24 @@ public class MainController {
 	@Autowired
 	Candidate_manager Candidate_manager;
 	@Autowired
+	SystemUtility system;
+	@Autowired
 	CandidateRepository canRepo;
 
 	public MainController() {
 		// TODO Auto-generated constructor stub
 	}
 	
-	
+	@GetMapping("/positions")
+	public String getPositions(HttpServletRequest request ) {
+		List<Position> positions = system.getPositions();
+		int length = positions.size();
+		request.setAttribute("number_of_positions", length);
+		for (int i = 0; i < length; i++) {
+			request.setAttribute("Position"+i, positions.get(i).getPositionName());
+		}
+		return"positions";
+	}
 
 	@GetMapping("/insert")
 	@ResponseBody

@@ -6,6 +6,7 @@ import java.util.Random;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.onlineInterview.Entities.Position;
 import com.onlineInterview.Entities.Question;
@@ -13,7 +14,7 @@ import com.onlineInterview.Entities.Topic;
 import com.onlineInterview.Repositories.PositionRepository;
 import com.onlineInterview.Repositories.QuestionRepository;
 import com.onlineInterview.Repositories.TopicRepository;
-
+@Service
 public class SystemUtility {
 
 	@Autowired
