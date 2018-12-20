@@ -39,5 +39,9 @@ public class Candidate_manager {
 		// TODO Auto-generated method stub
 		return candidatedb.existsById(email);
 	}
+	public Candidate getCandidate(String Email) {
+		return candidatedb.findById(Email).get();
+		
+	}
 
 }

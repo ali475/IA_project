@@ -36,5 +36,8 @@ public class Hr_maneger  {
 	public boolean isExests(String email) {
 		return  Hr_db.existsById(email);
 	}
+	public Hr get_Hr(String Email) {
+		return Hr_db.findById(Email).get();
+	}
 
 }
