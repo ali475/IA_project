@@ -51,8 +51,8 @@
 			<input class="inputField" type="email" name="email" id="email" required="true" placeholder="Email" onchange="AJAXmail()"><div id="exist"></div>
 			<input class="inputField" type="password" name="password" id="password" required="true" placeholder="password"><br>
 			<div class="userType">
-				<input class="radio" type="radio" name="type" id="type" value="a"> <label for="type1">Applicant</label>
-				<input class="radio" type="radio" name="type" id="type"  value="h"> <label for="type2">HR</label>
+				<input class="radio" type="radio" name="type" id="type" value="a"> <label for="type">Applicant</label>
+				<input class="radio" type="radio" name="type" id="type"  value="h"> <label for="type">HR</label>
 			</div>
 			<input type="submit" value="Login" onclick="validate(document.myForm.email)">
 		</form>
