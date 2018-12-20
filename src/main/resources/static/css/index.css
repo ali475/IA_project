@@ -23,30 +23,32 @@
 .header {
 	overflow: hidden;
 	background-color: #f1f1f1;
-	padding: 20px 10px;
+	padding: 5px 10px;
 }
   
 .header a {
 	float: left;
 	color: black;
 	text-align: center;
-	padding: 12px;
+	padding: 10px;
 	text-decoration: none;
 	font-size: 18px; 
-	line-height: 25px;
 	border-radius: 4px;
 }
   
 .header a.logo {
-	padding:0px;
-	height:fit-content;
-	width:fit-content;
+	float: left;
+	padding: 0px;
+	text-decoration: none;
+	font-size:0px; 
+	border-radius: 4px;
 }
   
 .logoImg{
 	width: 120px;
-	height: 30px;
+	height: 45px;
 	border: 0px;
+	border-radius:90px;
 }
 
 .header a:hover {
