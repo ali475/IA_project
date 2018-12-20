@@ -7,11 +7,11 @@ import com.onlineInterview.Entities.Candidate;
 import com.onlineInterview.Repositories.CandidateRepository;
 
 @Service
-public class Candidate_manager extends Account_Manager<Candidate>{
+public class Candidate_manager {
 	@Autowired
 	private CandidateRepository candidatedb;
 	
-	@Override
+	
 	public boolean login(String user_name, String password) {
 		boolean result = candidatedb.existsById(user_name);
 		if (result) {
@@ -25,7 +25,7 @@ public class Candidate_manager extends Account_Manager<Candidate>{
 		return false;
 	}
 
-	@Override
+	
 	public boolean register(Candidate user) {
 		Candidate getuser = candidatedb.findById(user.getUserNAme()).get();
 		if (getuser==null) {

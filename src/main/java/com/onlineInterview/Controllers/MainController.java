@@ -60,7 +60,7 @@ public class MainController {
 			,HttpServletRequest request) {
 		if(type.equals("h")) {
 			boolean result = Hr_maneger.login(email, password);
-			result =true;
+			
 			if (result) {
 				return "mainHR";
 			}
@@ -70,8 +70,8 @@ public class MainController {
 			
 		}
 		else if (type.equals("a")) {
-			boolean result ; //Candidate_manager.login(email, password);
-			result =true;
+			boolean result = Candidate_manager.login(email, password);
+			
 			if (result) {
 				return "mainApplicant";
 			}

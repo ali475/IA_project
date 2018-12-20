@@ -10,6 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 @Entity
 public class UserExam {
@@ -27,9 +28,10 @@ public class UserExam {
 	private float totalScore;
 	private String examType;
 	
-	@OneToMany(mappedBy = "exam", cascade = CascadeType.ALL)
-	private Set<PreExam> preExams;
-	
+	@OneToOne
+	@JoinColumn(name="p_e_id")
+	UserExam PreExam ;
+	boolean finished;
 	@OneToMany(mappedBy = "userExam", cascade = CascadeType.ALL)
 	private Set<UserExamQuestion> userExamQuestions;
 	
@@ -91,12 +93,22 @@ public class UserExam {
 		this.examType = examType;
 	}
 
-	public Set<PreExam> getPreExams() {
-		return preExams;
+	
+
+	public UserExam getPreExam() {
+		return PreExam;
 	}
 
-	public void setPreExams(Set<PreExam> preExams) {
-		this.preExams = preExams;
+	public void setPreExam(UserExam preExam) {
+		PreExam = preExam;
+	}
+
+	public boolean isFinished() {
+		return finished;
+	}
+
+	public void setFinished(boolean finished) {
+		this.finished = finished;
 	}
 
 	public Set<UserExamQuestion> getUserExamQuestions() {

@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service;
 import com.onlineInterview.Entities.Hr;
 import com.onlineInterview.Repositories.HrRepository;
 @Service
-public class Hr_maneger  extends Account_Manager<Hr>{
+public class Hr_maneger  {
 	@Autowired
 	HrRepository Hr_db;
 	public boolean login(String user_name, String password) {
@@ -34,7 +34,6 @@ public class Hr_maneger  extends Account_Manager<Hr>{
 
 
 	public boolean isExests(String email) {
-		// TODO Auto-generated method stub
 		return  Hr_db.existsById(email);
 	}
 

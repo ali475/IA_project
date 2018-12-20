@@ -24,7 +24,7 @@ public class UserExamQuestion {
     @JoinColumn(name = "question_id")
 	private Question userQuestion;
 	
-	
+	private String userAnwser;
 	public UserExamQuestion() {}
 
 	public UserExamQuestion(UserExam userExam, Question userQuestion) {
@@ -63,6 +63,22 @@ public class UserExamQuestion {
 
 	public void setQuestion(Question question) {
 		this.userQuestion = question;
+	}
+
+	public Question getUserQuestion() {
+		return userQuestion;
+	}
+
+	public void setUserQuestion(Question userQuestion) {
+		this.userQuestion = userQuestion;
+	}
+
+	public String getUserAnwser() {
+		return userAnwser;
+	}
+
+	public void setUserAnwser(String userAnwser) {
+		this.userAnwser = userAnwser;
 	}
 	
 

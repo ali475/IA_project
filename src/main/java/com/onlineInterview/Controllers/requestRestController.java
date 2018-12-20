@@ -21,8 +21,10 @@ public class requestRestController {
 @RequestMapping("/testemail")
 public String test (@RequestParam("email") String email,@RequestParam("type")String type
 		,HttpServletRequest request) {
+	System.out.println(email+"   	"+ type);
 	if(type.equals("h")) {
 		boolean result = Hr_maneger.isExests(email);
+		
 		if (result) {
 			return "";
 		}
