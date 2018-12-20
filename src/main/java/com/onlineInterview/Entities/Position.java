@@ -18,7 +18,10 @@ public class Position {
 	@OneToMany(mappedBy = "position", cascade = CascadeType.ALL)
 	private Set<Candidate> candidates;
 
+	public Position() {}
+	
 	public Position(String positionName, String positionDescribtion) {
+		super();
 		this.positionName = positionName;
 		this.positionDescribtion = positionDescribtion;
 	}

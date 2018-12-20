@@ -28,14 +28,16 @@ public class Candidate {
 	private Position position;
 
 
+	public Candidate() {}
+	
 	public Candidate(String userNAme, String phoneNumber, String email, String password, String cv){
+		super();
 		this.userNAme = userNAme;
 		this.phoneNumber = phoneNumber;
 		this.email = email;
 		this.password = password;
 		this.cv = cv;
 	}
-
 
 
 	public String getUserNAme() {

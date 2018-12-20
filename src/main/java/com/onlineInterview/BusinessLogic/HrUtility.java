@@ -9,6 +9,7 @@ import com.onlineInterview.Entities.Candidate;
 import com.onlineInterview.Entities.Hr;
 import com.onlineInterview.Entities.Interview;
 import com.onlineInterview.Entities.UserExam;
+import com.onlineInterview.Repositories.CandidateRepository;
 import com.onlineInterview.Repositories.InterviewRepository;
 import com.onlineInterview.Repositories.UserExamRepository;
 
@@ -20,6 +21,9 @@ public class HrUtility {
 	
 	@Autowired
 	UserExamRepository usrExamRepo;
+	
+	@Autowired
+	CandidateRepository canRepo;
 
 	public HrUtility() {}
 	
@@ -31,6 +35,16 @@ public class HrUtility {
 	public UserExam generateExam(Interview iv, int duration, int numOfQuestions, float totalScore, String examType) {
 		UserExam newExam = new UserExam(iv, duration, numOfQuestions, examType);
 		return usrExamRepo.save(newExam);
+	}
+	
+	public void approveCandidate(Candidate candidate) {
+		candidate.setApprovalState(true);
+		canRepo.save(candidate);
+	}
+	
+	public void disapproveCandidate(Candidate candidate) {
+		candidate.setApprovalState(false);
+		canRepo.save(candidate);
 	}
 
 }

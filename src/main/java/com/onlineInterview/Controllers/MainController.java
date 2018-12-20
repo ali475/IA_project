@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.onlineInterview.BusinessLogic.*;
+import com.onlineInterview.Entities.Candidate;
+import com.onlineInterview.Repositories.CandidateRepository;
 @Controller
 public class MainController {
 	
@@ -19,10 +21,25 @@ public class MainController {
 	Hr_maneger Hr_maneger ;
 	@Autowired
 	Candidate_manager Candidate_manager;
+	@Autowired
+	CandidateRepository canRepo;
 
 	public MainController() {
 		// TODO Auto-generated constructor stub
 	}
+	
+	
+
+	@GetMapping("/insert")
+	@ResponseBody
+	public String insert (HttpServletRequest req) {
+		Candidate can = new Candidate("abdo", "01224788990", "mymail@demo.com", "pass", "resume");
+		canRepo.save(can);
+		return "added";
+	}
+	
+	
+	
 	@GetMapping("/shit")
 	public String test (HttpServletRequest req) {
 		req.setAttribute("test", "this is from the shit url");
