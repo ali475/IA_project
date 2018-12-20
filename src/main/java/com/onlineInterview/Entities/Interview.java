@@ -5,6 +5,7 @@ import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -30,7 +31,7 @@ public class Interview {
     @JoinColumn(name = "hr_id")
 	private Hr hr;
 	
-	@OneToMany(mappedBy = "iv", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "iv", cascade = CascadeType.ALL,fetch = FetchType.EAGER)
 	private Set<UserExam> userExams;
 	
 	public Interview() {}

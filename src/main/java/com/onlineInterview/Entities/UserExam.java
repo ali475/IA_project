@@ -4,6 +4,7 @@ import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -32,7 +33,7 @@ public class UserExam {
 	@JoinColumn(name="p_e_id")
 	UserExam PreExam ;
 	boolean finished;
-	@OneToMany(mappedBy = "userExam", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "userExam", cascade = CascadeType.ALL,fetch = FetchType.EAGER)
 	private Set<UserExamQuestion> userExamQuestions;
 	
 	public UserExam() {}

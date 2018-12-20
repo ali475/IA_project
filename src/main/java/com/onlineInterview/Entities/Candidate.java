@@ -3,7 +3,9 @@ package com.onlineInterview.Entities;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -17,10 +19,11 @@ public class Candidate {
 	private String phoneNumber;
 	private String email;
 	private String password;
+	@Column(columnDefinition="text")
 	private String cv;
 	private boolean approvalState;
 	
-	@OneToMany(mappedBy = "candidate", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "candidate", cascade = CascadeType.ALL,fetch = FetchType.EAGER)
 	Set<Interview> interviews;
 	
 	@ManyToOne

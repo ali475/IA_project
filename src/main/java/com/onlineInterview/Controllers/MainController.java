@@ -50,6 +50,10 @@ public class MainController {
 	public String index (HttpServletRequest req) {
 		return"index";
 	}
+	@GetMapping("applicants")
+	public String applicants (HttpServletRequest req) {
+		return "applicants";
+	}
 	
 	
 	

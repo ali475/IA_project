@@ -3,7 +3,9 @@ package com.onlineInterview.Entities;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
@@ -12,10 +14,10 @@ public class Position {
 
 	@Id
 	private String positionName;
-	
+	@Column(columnDefinition="text")
 	private String positionDescribtion;
 	
-	@OneToMany(mappedBy = "position", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "position", cascade = CascadeType.ALL,fetch = FetchType.EAGER)
 	private Set<Candidate> candidates;
 
 	public Position() {}

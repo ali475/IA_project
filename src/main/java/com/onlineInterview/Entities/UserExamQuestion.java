@@ -1,5 +1,6 @@
 package com.onlineInterview.Entities;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -23,7 +24,7 @@ public class UserExamQuestion {
 	@ManyToOne
     @JoinColumn(name = "question_id")
 	private Question userQuestion;
-	
+	@Column(columnDefinition="text")
 	private String userAnwser;
 	public UserExamQuestion() {}
 
