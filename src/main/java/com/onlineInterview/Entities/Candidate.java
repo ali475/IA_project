@@ -5,6 +5,8 @@ import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 @Entity
@@ -21,18 +23,17 @@ public class Candidate {
 	@OneToMany(mappedBy = "candidate", cascade = CascadeType.ALL)
 	Set<Interview> interviews;
 	
+	@ManyToOne
+    @JoinColumn(name = "pos_name")
+	private Position position;
 
-	public Candidate() {}
 
-	public Candidate(String userNAme, String phoneNumber, String email, String password, String cv,
-			boolean approvalState) {
-		super();
+	public Candidate(String userNAme, String phoneNumber, String email, String password, String cv){
 		this.userNAme = userNAme;
 		this.phoneNumber = phoneNumber;
 		this.email = email;
 		this.password = password;
 		this.cv = cv;
-		this.approvalState = approvalState;
 	}
 
 
@@ -52,6 +53,7 @@ public class Candidate {
 	public void setPhoneNumber(String phoneNumber) {
 		this.phoneNumber = phoneNumber;
 	}
+	
 
 	public String getEmail() {
 		return email;
@@ -61,6 +63,7 @@ public class Candidate {
 		this.email = email;
 	}
 
+	
 	public String getPassword() {
 		return password;
 	}
@@ -69,6 +72,7 @@ public class Candidate {
 		this.password = password;
 	}
 
+	
 	public String getCv() {
 		return cv;
 	}
@@ -77,6 +81,7 @@ public class Candidate {
 		this.cv = cv;
 	}
 
+	
 	public boolean isApprovalState() {
 		return approvalState;
 	}
@@ -84,6 +89,16 @@ public class Candidate {
 	public void setApprovalState(boolean approvalState) {
 		this.approvalState = approvalState;
 	}
+
+	
+	public Position getPosition() {
+		return position;
+	}
+
+	public void setPosition(Position position) {
+		this.position = position;
+	}
+
 
 	public Set<Interview> getInterviews() {
 		return interviews;

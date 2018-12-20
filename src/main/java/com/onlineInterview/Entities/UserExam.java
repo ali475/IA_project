@@ -35,12 +35,11 @@ public class UserExam {
 	
 	public UserExam() {}
 
-	public UserExam(Interview iv, int duration, int numOfQuestions, float totalScore, String examType) {
+	public UserExam(Interview iv, int duration, int numOfQuestions, String examType) {
 		super();
 		this.iv = iv;
 		this.duration = duration;
 		this.numOfQuestions = numOfQuestions;
-		this.totalScore = totalScore;
 		this.examType = examType;
 	}
 
