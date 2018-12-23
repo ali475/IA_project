@@ -47,7 +47,7 @@
 	</div>
 
 	<div class="login">
-		<form name="myForm" action="login" >
+		<form name="loginForm" action="login" method="GET">
 			<input class="inputField" type="email" name="email" id="email" required="true" placeholder="Email" onchange="AJAXmail()">
 			<p class="msg" id="exist"></p><br>
 			<input class="inputField" type="password" name="password" id="password" required="true" placeholder="password"><br>
