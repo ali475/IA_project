@@ -16,11 +16,14 @@ public class Candidate {
 	
 	@Id
 	private String userNAme;
+	
 	private String phoneNumber;
 	private String email;
 	private String password;
+	
 	@Column(columnDefinition="text")
 	private String cv;
+	
 	private boolean approvalState;
 	
 	@OneToMany(mappedBy = "candidate", cascade = CascadeType.ALL,fetch = FetchType.EAGER)

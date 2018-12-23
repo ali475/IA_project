@@ -2,13 +2,15 @@
 <%@page import = "com.onlineInterview.Entities.Position" %>
 
 <%
-    List<Position> positions = request.getAttribute("positions", positions);
+    List<Position> positions = (List<Position>)request.getAttribute("positions");
 %>
 
 <html>
 
 <head>
 	<title>Home</title>
+	<link href="css/index.css" rel="stylesheet">
+	<link href="css/inputs.css" rel="stylesheet">
 </head>
 
 <body>
@@ -22,8 +24,8 @@
 	</div>
         
     <div class="positions-con">
-        <%  foreach(Position p: positions) { %>
-            <p> <%=p.getPositionName()%> </p>
+        <%  for(int i=0;i<positions.size();i++) { %>
+            <a  href="apply?pName=<%=positions.get(i).getPositionName()%>"> <%out.print(positions.get(i).getPositionName());%> </a>
         <% } %>
     </div>
 	

@@ -57,7 +57,7 @@
 			</div>
 			<div class="btn-container"><input id="submitButton" type="submit" value="Login" onclick="validate(document.myForm.email)"></div>
 		</form>
-		<a href="register.html">join us</a>
+		<a href="register">join us</a>
 	</div>
 </body>
 

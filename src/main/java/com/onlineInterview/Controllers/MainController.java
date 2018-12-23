@@ -12,6 +12,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.onlineInterview.BusinessLogic.*;
@@ -71,16 +72,57 @@ public class MainController {
 		catch (NullPointerException e) {return "redirect:/index";}
 		
 	}
+	
+	@GetMapping ("/register")
+	public String registerPage(HttpServletRequest request) 
+	{
+		Candidate user = new Candidate("ali","1234","mail","1234","kjhghh");
+		System.out.println(Candidate_manager.register(user));
+		return "register";
+	}
+	
+	@PostMapping ("/register")
+	public String registerRequest(HttpServletRequest request) {
+		
+		try {
+			String username = request.getParameter("username");
+			String email = request.getParameter("email");
+			String password = request.getParameter("password");
+			String phone = request.getParameter("phone");
+			System.out.println(email);
+			Candidate user = new Candidate(username,phone,email,password,"kjhghh");
+			if(!Candidate_manager.register(user))
+			{
+				return "register";
+			}
+			return "redirect:/index";
+			
+		} 
+		catch (NullPointerException e) {return "redirect:/register";}
+		
+	}
 
 	
 	
 	@GetMapping("/positions")
 	public void getPositions(HttpServletRequest request, HttpServletResponse response) {
 		List<Position> positions = system.getPositions();
-		RequestDispatcher rd = request.getRequestDispatcher("mainApplicant");
+		RequestDispatcher rd = request.getRequestDispatcher("/mainApplicant");
 		request.setAttribute("positions", positions);
 		try {rd.forward(request, response);} 
 		catch (ServletException | IOException e) {e.printStackTrace();}
+	}
+	
+	@GetMapping("/mainApplicant")
+	public String getPositions(HttpServletRequest request) {
+	
+		return "mainApplicant";	
+	}
+	
+	@GetMapping ("/apply")
+	public String applyPage(HttpServletRequest request) {
+		String pName = request.getParameter("pName");
+		return "ay 7aga";
 	}
 
 	@GetMapping("/insert")

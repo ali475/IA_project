@@ -44,6 +44,10 @@ public class SystemUtility {
 		return listPositions;
 	}
 	
+	public Position getPositionByName(String pName){
+		return posRepo.findById(pName).get();
+	}
+	
 	public ArrayList<Question> get_questions(String question_name,int number_of_questions) {
 		Topic currnt_topic = T_repository.findById(question_name).get();
 		Set<Question>questions=currnt_topic.getQuestions();
