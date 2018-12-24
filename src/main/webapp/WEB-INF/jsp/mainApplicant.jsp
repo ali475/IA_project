@@ -19,7 +19,7 @@
 
 		<a href="#default" class="logo"><img class="logoImg" src="images/infinity.jpg"></a>
 		<div class="header-right">
-			<a class="active" href="positions">Available positions</a>
+			<a class="active" href="mainApplicant">Available positions</a>
 			<a href="#contact">My applications</a>
 			<a href="#about">Updates</a>
 		</div>
