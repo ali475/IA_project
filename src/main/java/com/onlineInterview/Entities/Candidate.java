@@ -1,5 +1,6 @@
 package com.onlineInterview.Entities;
 
+import java.io.File;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -21,8 +22,8 @@ public class Candidate {
 	private String email;
 	private String password;
 	
-	@Column(columnDefinition="text")
-	private String cv;
+	@Column(columnDefinition="LONGBLOB")
+	private File cv;
 	
 	private boolean approvalState;
 	
@@ -36,7 +37,7 @@ public class Candidate {
 
 	public Candidate() {}
 	
-	public Candidate(String userNAme, String phoneNumber, String email, String password, String cv){
+	public Candidate(String userNAme, String phoneNumber, String email, String password, File cv){
 		super();
 		this.userNAme = userNAme;
 		this.phoneNumber = phoneNumber;
@@ -81,11 +82,11 @@ public class Candidate {
 	}
 
 	
-	public String getCv() {
+	public File getCv() {
 		return cv;
 	}
 
-	public void setCv(String cv) {
+	public void setCv(File cv) {
 		this.cv = cv;
 	}
 

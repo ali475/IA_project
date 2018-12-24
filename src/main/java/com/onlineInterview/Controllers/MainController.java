@@ -1,5 +1,6 @@
 package com.onlineInterview.Controllers;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
@@ -95,23 +96,19 @@ public class MainController {
 
 	@PostMapping("/register")
 	public String registerRequest(HttpServletRequest request) {
-
 		try {
 			String username = request.getParameter("username");
 			String email = request.getParameter("email");
 			String password = request.getParameter("password");
 			String phone = request.getParameter("phone");
-			System.out.println(email);
 			Candidate user = new Candidate(username, phone, email, password, null);
 			if (!acc.register(user)) {
 				return "register";
 			}
 			return "redirect:/index";
-
 		} catch (NullPointerException e) {
 			return "redirect:/register";
 		}
-
 	}
 
 	@GetMapping("/mainApplicant")
@@ -134,17 +131,20 @@ public class MainController {
 	@ResponseBody
 	public String cv(HttpServletRequest request,HttpServletResponse response) throws IOException, ServletException {
 
-		String fileName = (String) request.getParameter("cv");
+		String fileName = request.getParameter("cv");
+		File f = new File(fileName);
+		//need to update that candidant`s cv by file "f"
+		System.out.println(fileName);
 		
-
 		return "uploaded";
 	}
 
 	@GetMapping("/insert")
 	@ResponseBody
 	public String insert(HttpServletRequest req) {
-
-		Object usrObj = new Candidate("abdo", "01224788990", "mymail@demo.com", "pass", "resume");
+		
+		File f = new File("C:\\Users\\Ali\\Downloads\\PN.pdf");
+		Object usrObj = new Candidate("abdo", "01224788990", "mymail@demo.com", "pass", f);
 		canRepo.save((Candidate) usrObj);
 		Position pos = new Position("Java Developer", "java,oop,spring");
 		posRepo.save(pos);
