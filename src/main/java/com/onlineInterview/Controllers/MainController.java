@@ -3,7 +3,8 @@ package com.onlineInterview.Controllers;
 import java.io.IOException;
 import java.util.List;
 
-import javax.servlet.RequestDispatcher;
+
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -19,140 +20,148 @@ import com.onlineInterview.BusinessLogic.*;
 import com.onlineInterview.Entities.Candidate;
 import com.onlineInterview.Entities.Position;
 import com.onlineInterview.Repositories.CandidateRepository;
+import com.onlineInterview.Repositories.PositionRepository;
 
 @Controller
 public class MainController {
-	
-	@Autowired
-	Hr_maneger Hr_maneger ;
-	
-	@Autowired
-	Candidate_manager Candidate_manager;
-	
+
 	@Autowired
 	SystemUtility system;
-	
+
 	@Autowired
 	CandidateRepository canRepo;
 
-	public MainController() {}
-	
+	@Autowired
+	PositionRepository posRepo;
+
+	@Autowired
+	AccountManager acc;
+
+	public MainController() {
+	}
+
 	@GetMapping("/")
-	public String mainUrl(HttpServletRequest request ) {
+	public String mainUrl(HttpServletRequest request) {
 		HttpSession userSession = system.getUserSession(request);
-		if(userSession==null) {return "redirect:/index";}
-		else {
+		if (userSession == null) {
+			return "redirect:/index";
+		} else {
 			String userType = (String) userSession.getAttribute("userType");
-			if(userType.equals("hr")) {return "redirect:/mainHR";}
+			if (userType.equals("hr")) {
+				return "redirect:/mainHR";
+			}
 			return "redirect:/mainApplicant";
 		}
 	}
-	
-	
-	@GetMapping ("/login")
+
+	@GetMapping("/index")
+	public String index(HttpServletRequest req) {
+		return "index";
+	}
+
+	@GetMapping("/login")
 	public String loginRequest(HttpServletRequest request) {
-		
+
 		try {
 			String email = request.getParameter("email");
 			String password = request.getParameter("password");
 			String type = request.getParameter("type");
-			
-			if(type.equals("h")) {
-				boolean result = Hr_maneger.login(email, password);
-				if(result) {return "redirect:/mainHR";}
+
+			if (type.equals("h")) {
+				boolean result = acc.login(type, email, password);
+				if (result) {
+					return "redirect:/mainHR";
+				}
+				return "redirect:/index";
+			} else if (type.equals("a")) {
+				boolean result = acc.login(type, email, password);
+				if (result) {
+					return "redirect:/mainApplicant";
+				}
+				return "redirect:/index";
+			} else {
 				return "redirect:/index";
 			}
-			else if(type.equals("a")) {
-				boolean result = Candidate_manager.login(email, password);
-				if(result) {return "redirect:/mainApplicant";}
-				return "redirect:/index";
-			}
-			else {return "redirect:/index";}
-		} 
-		catch (NullPointerException e) {return "redirect:/index";}
-		
+		} catch (NullPointerException e) {
+			return "redirect:/index";
+		}
+
 	}
-	
-	@GetMapping ("/register")
-	public String registerPage(HttpServletRequest request) 
-	{
-		Candidate user = new Candidate("ali","1234","mail","1234","kjhghh");
-		System.out.println(Candidate_manager.register(user));
+
+	@GetMapping("/register")
+	public String registerPage(HttpServletRequest request) {
 		return "register";
 	}
-	
-	@PostMapping ("/register")
+
+	@PostMapping("/register")
 	public String registerRequest(HttpServletRequest request) {
-		
+
 		try {
 			String username = request.getParameter("username");
 			String email = request.getParameter("email");
 			String password = request.getParameter("password");
 			String phone = request.getParameter("phone");
 			System.out.println(email);
-			Candidate user = new Candidate(username,phone,email,password,"kjhghh");
-			if(!Candidate_manager.register(user))
-			{
+			Candidate user = new Candidate(username, phone, email, password, null);
+			if (!acc.register(user)) {
 				return "register";
 			}
 			return "redirect:/index";
-			
-		} 
-		catch (NullPointerException e) {return "redirect:/register";}
-		
+
+		} catch (NullPointerException e) {
+			return "redirect:/register";
+		}
+
 	}
 
-	
-	
-	@GetMapping("/positions")
-	public void getPositions(HttpServletRequest request, HttpServletResponse response) {
-		List<Position> positions = system.getPositions();
-		RequestDispatcher rd = request.getRequestDispatcher("/mainApplicant");
-		request.setAttribute("positions", positions);
-		try {rd.forward(request, response);} 
-		catch (ServletException | IOException e) {e.printStackTrace();}
-	}
-	
 	@GetMapping("/mainApplicant")
 	public String getPositions(HttpServletRequest request) {
-	
-		return "mainApplicant";	
+		List<Position> positions = system.getPositions();
+		request.setAttribute("positions", positions);
+		return "mainApplicant";
 	}
-	
-	@GetMapping ("/apply")
+
+	@GetMapping("/apply")
 	public String applyPage(HttpServletRequest request) {
 		String pName = request.getParameter("pName");
-		return "ay 7aga";
+		Position pos = system.getPositionByName(pName);
+		request.setAttribute("position", pos);
+
+		return "apply";
+	}
+
+	@PostMapping("/upload")
+	@ResponseBody
+	public String cv(HttpServletRequest request,HttpServletResponse response) throws IOException, ServletException {
+
+		String fileName = (String) request.getParameter("cv");
+		
+
+		return "uploaded";
 	}
 
 	@GetMapping("/insert")
 	@ResponseBody
-	public String insert (HttpServletRequest req) {
-		Candidate can = new Candidate("abdo", "01224788990", "mymail@demo.com", "pass", "resume");
-		canRepo.save(can);
+	public String insert(HttpServletRequest req) {
+
+		Object usrObj = new Candidate("abdo", "01224788990", "mymail@demo.com", "pass", "resume");
+		canRepo.save((Candidate) usrObj);
+		Position pos = new Position("Java Developer", "java,oop,spring");
+		posRepo.save(pos);
+		Position pos1 = new Position("PHP Developer", "Php,oop,larvel");
+		posRepo.save(pos1);
 		return "added";
 	}
-	
-	
-	
+
 	@GetMapping("/shit")
-	public String test (HttpServletRequest req) {
+	public String test(HttpServletRequest req) {
 		req.setAttribute("test", "this is from the shit url");
 		return "welcome";
 	}
 
-	@GetMapping("/index")
-	public String index (HttpServletRequest req) {
-		return"index";
-	}
 	@GetMapping("applicants")
-	public String applicants (HttpServletRequest req) {
+	public String applicants(HttpServletRequest req) {
 		return "applicants";
 	}
-	
-	
-	
-		
-	
-	
+
 }

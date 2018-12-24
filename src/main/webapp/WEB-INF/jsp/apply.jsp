@@ -12,7 +12,7 @@
 <body>
 
 
-	<form>
+	<form action="upload" method="POST">
 		<p><%= pos.getPositionName() %></p>
 		<p><%= pos.getPositionDescribtion() %></p>
 		Upload CV:<input type="file" name="cv" >
@@ -20,6 +20,5 @@
 		<input type="submit" value="Apply">
 	</form>
 
-	<a href="mainHR.html"><input type="submit" value="Back"></a>
 </body>
 </html>

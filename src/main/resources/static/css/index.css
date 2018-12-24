@@ -1,3 +1,7 @@
+body,html { 
+	margin: 0px;
+}
+
 .body { 
 	background-image:url(/images/galaxy.jfif);
 	background-repeat: no-repeat;
@@ -12,18 +16,18 @@
 	position: inherit;
 	background-color: rgba(0,0,0,0.6);
 	width:fit-content;
-	margin:15% auto;
 	height: fit-content;
+	margin:15% auto;
 	padding-bottom: 10px;
 	padding-top: 10px;
 	border-radius: 20px;
 }
 
-/* Style the header with a grey background and some padding */
 .header {
 	overflow: hidden;
 	background-color: #f1f1f1;
 	padding: 5px 10px;
+	width:100%;
 }
   
 .header a {
