@@ -2,7 +2,7 @@
 <%@page import = "com.onlineInterview.Entities.Position" %>
 <%@page import = "com.onlineInterview.Entities.Candidate" %>
 <%
-    List<Candidate> cans = (Candidate)request.getAttribute("applicants");
+    List<Candidate> cans = (List<Candidate>)request.getAttribute("applicants");
 %>
 
 <html>
@@ -16,7 +16,7 @@
 	<%  for(int i=0;i<cans.size();i++) { %>
 
 		<a href="#">
-			<%out.println(can.get(i).getUserNAme());%> 
+			<%out.println(cans.get(i).getUserNAme());%> 
 		</a>
 
 	<% } %>
