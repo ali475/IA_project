@@ -31,7 +31,7 @@
 		<%  for(int i=0;i<positions.size();i++) { %>
 			<div class="position">
 				<div>
-            	<a class="position-link" href="applicants?pName=<%=positions.get(i).getPositionName()%>">
+            	<a class="position-link" href="candidates?pName=<%=positions.get(i).getPositionName()%>">
 					<%out.print(positions.get(i).getPositionName());%> 
 				</a>
 				</div>

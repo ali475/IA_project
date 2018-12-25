@@ -140,12 +140,11 @@ public class MainController {
 		return "apply";
 	}
 	
-	@GetMapping("/applicants")
-	public String applicantsPage(HttpServletRequest request) {
+	@GetMapping("/candidates")
+	public String shit(HttpServletRequest request) {
 		String pName = request.getParameter("pName");
-		//List<Candidate> cans = system.getPositionApplicants(pName);
-		//request.setAttribute("applicants", cans);
-
+		List<Candidate> cans = system.getPositionApplicants(pName);
+		request.setAttribute("applicants", cans);
 		return "applicants";
 		
 	}
