@@ -2,6 +2,7 @@ package com.onlineInterview.Controllers;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -19,8 +20,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.onlineInterview.BusinessLogic.*;
 import com.onlineInterview.Entities.Candidate;
+import com.onlineInterview.Entities.Hr;
 import com.onlineInterview.Entities.Position;
 import com.onlineInterview.Repositories.CandidateRepository;
+import com.onlineInterview.Repositories.HrRepository;
 import com.onlineInterview.Repositories.PositionRepository;
 
 @Controller
@@ -31,6 +34,9 @@ public class MainController {
 
 	@Autowired
 	CandidateRepository canRepo;
+	
+	@Autowired
+	HrRepository hrRepo;
 
 	@Autowired
 	PositionRepository posRepo;
@@ -38,8 +44,7 @@ public class MainController {
 	@Autowired
 	AccountManager acc;
 
-	public MainController() {
-	}
+	public MainController() {}
 
 	@GetMapping("/")
 	public String mainUrl(HttpServletRequest request) {
@@ -71,13 +76,17 @@ public class MainController {
 			if (type.equals("h")) {
 				boolean result = acc.login(type, email, password);
 				if (result) {
-					return "redirect:/mainHR";
+					request.getSession().setAttribute("userName", email);
+					request.getSession().setAttribute("userType", type);
+					return "redirect:/home";
 				}
 				return "redirect:/index";
 			} else if (type.equals("a")) {
 				boolean result = acc.login(type, email, password);
 				if (result) {
-					return "redirect:/mainApplicant";
+					request.getSession().setAttribute("userName", email);
+					request.getSession().setAttribute("userType", type);
+					return "redirect:/home";
 				}
 				return "redirect:/index";
 			} else {
@@ -102,20 +111,24 @@ public class MainController {
 			String password = request.getParameter("password");
 			String phone = request.getParameter("phone");
 			Candidate user = new Candidate(username, phone, email, password, null);
-			if (!acc.register(user)) {
-				return "register";
-			}
+			if (!acc.register(user)) {return "register";}
 			return "redirect:/index";
-		} catch (NullPointerException e) {
-			return "redirect:/register";
-		}
+		} 
+		catch (NullPointerException e) {return "redirect:/register";}
 	}
 
-	@GetMapping("/mainApplicant")
+	@GetMapping("/home")
 	public String getPositions(HttpServletRequest request) {
-		List<Position> positions = system.getPositions();
-		request.setAttribute("positions", positions);
-		return "mainApplicant";
+		HttpSession session = request.getSession(false); 
+		if(session==null) {return "redirect:/index";}
+		else {
+			List<Position> positions = system.getPositions();
+			request.setAttribute("positions", positions);
+			String userType = (String) session.getAttribute("userType");
+			if(userType.equals("a")) {return "mainApplicant";}
+			else if(userType.equals("h")) {return "mainHR";}
+			else {return "redirect:/index";}
+		}
 	}
 
 	@GetMapping("/apply")
@@ -126,6 +139,17 @@ public class MainController {
 
 		return "apply";
 	}
+	
+	@GetMapping("/applicants")
+	public String applicantsPage(HttpServletRequest request) {
+		String pName = request.getParameter("pName");
+		//List<Candidate> cans = system.getPositionApplicants(pName);
+		//request.setAttribute("applicants", cans);
+
+		return "applicants";
+		
+	}
+
 
 	@PostMapping("/upload")
 	@ResponseBody
@@ -143,21 +167,28 @@ public class MainController {
 	@ResponseBody
 	public String insert(HttpServletRequest req) {
 		
-		File f = new File("C:\\Users\\Ali\\Downloads\\PN.pdf");
-		Object usrObj = new Candidate("abdo", "01224788990", "mymail@demo.com", "pass", f);
-		canRepo.save((Candidate) usrObj);
-		Position pos = new Position("Java Developer", "java,oop,spring");
-		posRepo.save(pos);
-		Position pos1 = new Position("PHP Developer", "Php,oop,larvel");
+		Position pos1 = new Position("Java Developer", "java,oop,spring");
+		Position pos2 = new Position("PHP Developer", "Php,oop,larvel");
 		posRepo.save(pos1);
+		posRepo.save(pos2);
+		
+		//File f = new File("C:\\Users\\Ali\\Downloads\\PN.pdf");
+		Candidate can = new Candidate("abdo", "01224788990", "mymail@demo.com", "1234", null);
+		can.setPosition(pos1);
+		canRepo.save(can);
+		
+		Candidate can2 = new Candidate("khaled", "01224788990", "mymail2@demo.com", "1234", null);
+		can2.setPosition(pos1);
+		canRepo.save(can2);
+		
+		Hr hr = new Hr("ali", "mymail1@demo.com", "1234");
+		hrRepo.save(hr);
+		
+		
+		
 		return "added";
 	}
 
-	@GetMapping("/shit")
-	public String test(HttpServletRequest req) {
-		req.setAttribute("test", "this is from the shit url");
-		return "welcome";
-	}
 
 	@GetMapping("applicants")
 	public String applicants(HttpServletRequest req) {

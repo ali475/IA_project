@@ -5,6 +5,7 @@
 	<title>Login</title>
 	<link href="css/index.css" rel="stylesheet">
 	<link href="css/inputs.css" rel="stylesheet">
+	<link href="css/header.css" rel="stylesheet">
 
 </head>
 
@@ -24,6 +25,7 @@
 
 		<form name="loginForm" action="login" method="GET">
 			<input class="inputField" type="text" name="email" id="email" required="true" placeholder="user name">
+			<br>
 			<input class="inputField" type="password" name="password" id="password" required="true" placeholder="password">
 			<br>
 			<div class="userType">

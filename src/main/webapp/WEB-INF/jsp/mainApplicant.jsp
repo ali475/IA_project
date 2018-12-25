@@ -11,6 +11,7 @@
 	<title>Home</title>
 	<link href="css/mainApplicant.css" rel="stylesheet">
 	<link href="css/inputs.css" rel="stylesheet">
+	<link href="css/header.css" rel="stylesheet">
 </head>
 
 <body>
@@ -36,7 +37,7 @@
 				</a>
 				</div>
 				<div class="position-info">
-				<h6> <%out.print(positions.get(i).getPositionName());%> </h6>
+				<h6> <%out.print(positions.get(i).getPositionDescribtion());%> </h6>
 				</div>
 			</div>
 		<% } %>

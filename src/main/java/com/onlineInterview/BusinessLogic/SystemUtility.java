@@ -11,6 +11,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.onlineInterview.Entities.Candidate;
 import com.onlineInterview.Entities.Position;
 import com.onlineInterview.Entities.Question;
 import com.onlineInterview.Entities.Topic;
@@ -35,6 +36,15 @@ public class SystemUtility {
 		    return request.getSession();
 		}
 		return null;
+	}
+	
+	public List<Candidate> getPositionApplicants(String posName){
+		Position pos = posRepo.findById(posName).get();
+		Set<Candidate> cans = pos.getCandidates();
+		List<Candidate> candidates = new ArrayList<>();
+		for (Candidate c : cans) {candidates.add(c);}
+		
+		return candidates;
 	}
 	
 	public List<Position> getPositions(){
