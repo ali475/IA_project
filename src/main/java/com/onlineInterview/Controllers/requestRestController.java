@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.onlineInterview.BusinessLogic.AccountManager;
 import com.onlineInterview.BusinessLogic.Candidate_manager;
 import com.onlineInterview.BusinessLogic.Hr_maneger;
 
@@ -16,6 +17,8 @@ public class requestRestController {
 	Candidate_manager Candidate_manager;
 	@Autowired 
 	Hr_maneger Hr_maneger;
+	@Autowired
+	AccountManager acc;
 	
 	
 @RequestMapping("/testemail")

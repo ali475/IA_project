@@ -38,6 +38,8 @@ public class SystemUtility {
 		return null;
 	}
 	
+	public List<String> getExamTypes(){return T_repository.findExamTypes();}
+	
 	public List<Candidate> getPositionApplicants(String posName){
 		Position pos = posRepo.findById(posName).get();
 		Set<Candidate> cans = pos.getCandidates();

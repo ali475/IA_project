@@ -42,8 +42,21 @@
 }
   
 .header-right {
-	float: right;
+	float: left;
+	margin-left: 22.5%;
 }
+
+.most-right {
+	float: right;
+	margin-right: 2%;
+}
+
+.most-right a{
+	margin:0px;
+	font-size: 13px;
+}
+
+.most-right a:hover{background-color:#f6b93b;}
   
    
 @media screen and (max-width: 500px) {

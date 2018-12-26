@@ -17,7 +17,7 @@
 			<a class="active" href="#home">Home</a>
 			<a href="#contact">Contact</a>
 			<a href="#about">About</a>
-			<a href="register">Register</a>
+			<a href="/register">Register</a>
 		</div>
 	</div>
 
@@ -32,7 +32,7 @@
 				<input class="radio" type="radio" name="type" id="type" value="a" checked> <label for="type">Applicant</label>
 				<input class="radio" type="radio" name="type" id="type"  value="h"> <label for="type">HR</label>
 			</div>
-			<div class="btn-container"><input id="submitButton" type="submit" value="Login" ></div>
+			<div class="btn-container"><input class="submitButton" type="submit" value="Login" ></div>
 		</form>
 		
 	</div>

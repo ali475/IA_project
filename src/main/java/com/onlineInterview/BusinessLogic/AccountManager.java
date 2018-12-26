@@ -15,7 +15,7 @@ public class AccountManager {
 	CandidateRepository candidateDb;
 	
 	@Autowired
-	private HrRepository HrDb;
+	HrRepository HrDb;
 
 	public AccountManager() {}
 	
@@ -57,6 +57,18 @@ public class AccountManager {
 			return false;
 		}
 		
+	}
+	
+	public boolean isExist(String userName,String userType) {
+		if(userType.equals("h")) {return HrDb.existsById(userName);}
+		else if(userType.equals("a")) {return candidateDb.existsById(userName);}
+		else {return true;}
+	}
+	
+	public Object getUser(String userName,String userType) {
+		if(userType.equals("h")) {return (Object) HrDb.findById(userName).get();}
+		else if(userType.equals("a")) {return (Object) candidateDb.findById(userName).get();}
+		else{return null;}
 	}
 	
 	

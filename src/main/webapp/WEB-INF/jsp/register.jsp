@@ -2,6 +2,11 @@
 <html>
 <head>
 	<title>Register</title>
+
+	<link href="css/register.css" rel="stylesheet">
+	<link href="css/inputs.css" rel="stylesheet">
+	<link href="css/header.css" rel="stylesheet">
+
 	<script type="text/javascript">
 		function validate()
 		{
@@ -48,14 +53,36 @@
         }
 	</script>
 </head>
-<body>
-	<form name="myForm" action="register" method="POST">
-		User name:<input type="text" name="username" id="username" required="true"><br>
-		Email:<input type="email" name="email" id="email" required="true" onchange="AJAX()"><div id="exist"></div>
-		Phone number:<input type="numbers" name="phone" id="phone"><br>
-		Password<input type="password" name="password" id="password" required="true"><br>
-		<input type="submit" value="Register" onclick="validate()">
-	</form>
-	<a href="index">i have an account</a>
+
+<body class="body">
+
+	<div class="header">
+		<a href="#default" class="logo"><img class="logoImg" src="images/infinity.jpg"></a>
+		<div class="header-right">
+			<a class="active" href="#home">Home</a>
+			<a href="#contact">Contact</a>
+			<a href="#about">About</a>
+		</div>
+		<div class="most-right">
+			<a class="submitButton" href="/index">login</a>
+		</div>
+	</div>
+
+	<div class="register">
+		<form name="registerForm" action="/register" method="POST">
+			<input class="inputField" type="text" name="username" id="username" placeholder="user name" required="true">
+			<br>
+			<input class="inputField" type="email" name="email" id="email" placeholder="email" required="true" onchange="AJAX()">
+			<div id="exist"></div>
+			<input class="inputField" type="numbers" name="phone" id="phone" placeholder="phone number">
+			<br>
+			<input class="inputField" type="password" name="password" id="password" placeholder="password" required="true">
+			<br>
+			<div class="btn-container">
+				<input class="submitButton" type="submit" value="Register" onclick="validate()">
+			</div>
+		</form>
+	</div>
+	
 </body>
 </html>

@@ -11,7 +11,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 
 @Entity
 public class UserExam {
@@ -20,30 +19,30 @@ public class UserExam {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
-	@ManyToOne
-	@JoinColumn(name = "iv_id")
-	private Interview iv;
-	
 	private int duration;
 	private int numOfQuestions;
 	private float totalScore;
 	private String examType;
+	private	int examOrder;
+	private boolean finished;
 	
-	@OneToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name="p_e_id")
-	UserExam PreExam ;
-	boolean finished;
+	@ManyToOne
+	@JoinColumn(name = "iv_id")
+	private Interview iv;
+	
 	@OneToMany(mappedBy = "userExam", cascade = CascadeType.ALL,fetch = FetchType.EAGER)
 	private Set<UserExamQuestion> userExamQuestions;
 	
 	public UserExam() {}
 
-	public UserExam(Interview iv, int duration, int numOfQuestions, String examType) {
+	public UserExam(Interview iv, int examOrder, int duration, int numOfQuestions, String examType) {
 		super();
 		this.iv = iv;
+		this.examOrder=examOrder;
 		this.duration = duration;
 		this.numOfQuestions = numOfQuestions;
 		this.examType = examType;
+		this.finished=false;
 	}
 
 	public int getId() {
@@ -94,14 +93,12 @@ public class UserExam {
 		this.examType = examType;
 	}
 
-	
-
-	public UserExam getPreExam() {
-		return PreExam;
+	public int getExamOrder() {
+		return examOrder;
 	}
 
-	public void setPreExam(UserExam preExam) {
-		PreExam = preExam;
+	public void setExamOrder(int examOrder) {
+		this.examOrder = examOrder;
 	}
 
 	public boolean isFinished() {

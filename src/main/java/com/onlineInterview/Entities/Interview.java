@@ -1,5 +1,6 @@
 package com.onlineInterview.Entities;
 
+
 import java.util.Date;
 import java.util.Set;
 
@@ -13,6 +14,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 @Entity
 public class Interview {
 
@@ -21,6 +24,8 @@ public class Interview {
 	private int id;
 	
 	private String stateType;
+	
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+2")
 	private Date deadline;
 	
 	@ManyToOne
@@ -32,11 +37,11 @@ public class Interview {
 	private Hr hr;
 	
 	@OneToMany(mappedBy = "iv", cascade = CascadeType.ALL,fetch = FetchType.EAGER)
-	private Set<UserExam> userExams;
+	Set<UserExam> userExams;
 	
 	public Interview() {}
 
-	public Interview(String stateType, Date deadline, Candidate candidate, Hr hr) {
+	public Interview(String stateType,Date deadline, Candidate candidate, Hr hr) {
 		super();
 		this.stateType = stateType;
 		this.deadline = deadline;
@@ -84,13 +89,13 @@ public class Interview {
 		this.hr = hr;
 	}
 
-	public Set<UserExam> getUserExams() {
-		return userExams;
-	}
+	//public Set<UserExam> getUserExams() {
+		//return userExams;
+	//}
 
-	public void setUserExams(Set<UserExam> userExams) {
-		this.userExams = userExams;
-	}
+	//public void setUserExams(Set<UserExam> userExams) {
+	//	this.userExams = userExams;
+	//}
 	
 	
 	

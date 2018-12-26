@@ -1,0 +1,27 @@
+body,html { 
+	margin: 0px;
+}
+
+.body { 
+	background-image:url(/images/galaxy.jfif);
+	background-repeat: no-repeat;
+	height:100%;
+	font-family: cursive;
+	background-size: cover;
+	}
+	
+	
+	
+.register { 
+	position: inherit;
+	background-color: rgba(0,0,0,0.6);
+	width:fit-content;
+	height: fit-content;
+	margin:15% auto;
+	padding-bottom: 10px;
+	padding-top: 10px;
+	border-radius: 20px;
+}
+
+
+

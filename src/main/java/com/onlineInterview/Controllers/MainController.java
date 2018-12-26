@@ -2,11 +2,12 @@ package com.onlineInterview.Controllers;
 
 import java.io.File;
 import java.io.IOException;
-import java.sql.Date;
-import java.util.ArrayList;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
-
-
+import java.util.TimeZone;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -41,17 +42,19 @@ import com.onlineInterview.Repositories.UserExamRepository;
 public class MainController {
 
 	@Autowired
-	SystemUtility system;
-
+	AccountManager acc;
+	@Autowired
+	HrUtility hrUtility;
+	@Autowired
+	SystemUtility systemUtility;
+	
+	
 	@Autowired
 	CandidateRepository canRepo;
-	
 	@Autowired
 	HrRepository hrRepo;
-
 	@Autowired
 	PositionRepository posRepo;
-	
 	@Autowired
 	QuestionRepository QRepo;
 	@Autowired
@@ -62,15 +65,13 @@ public class MainController {
 	UserExamQuestionRepository UEQRepo;
 	@Autowired
 	InterviewRepository IVRepo;
-
-	@Autowired
-	AccountManager acc;
+	
 
 	public MainController() {}
 
 	@GetMapping("/")
 	public String mainUrl(HttpServletRequest request) {
-		HttpSession userSession = system.getUserSession(request);
+		HttpSession userSession = systemUtility.getUserSession(request);
 		if (userSession == null) {
 			return "redirect:/index";
 		} else {
@@ -144,7 +145,7 @@ public class MainController {
 		HttpSession session = request.getSession(false); 
 		if(session==null) {return "redirect:/index";}
 		else {
-			List<Position> positions = system.getPositions();
+			List<Position> positions = systemUtility.getPositions();
 			request.setAttribute("positions", positions);
 			String userType = (String) session.getAttribute("userType");
 			if(userType.equals("a")) {return "mainApplicant";}
@@ -156,19 +157,67 @@ public class MainController {
 	@GetMapping("/apply")
 	public String applyPage(HttpServletRequest request) {
 		String pName = request.getParameter("pName");
-		Position pos = system.getPositionByName(pName);
+		Position pos = systemUtility.getPositionByName(pName);
 		request.setAttribute("position", pos);
-
 		return "apply";
 	}
 	
 	@GetMapping("/candidates")
-	public String shit(HttpServletRequest request) {
+	public String positionCandidates(HttpServletRequest request) {
 		String pName = request.getParameter("pName");
-		List<Candidate> cans = system.getPositionApplicants(pName);
+		List<Candidate> cans = systemUtility.getPositionApplicants(pName);
 		request.setAttribute("applicants", cans);
 		return "applicants";
 		
+	}
+	
+	@GetMapping("/evaluateCandidate")
+	public String createInterviewPage(HttpServletRequest request) {
+		List<String> examTypes = systemUtility.getExamTypes();
+		request.setAttribute("examTypes", examTypes);
+		request.setAttribute("userName", request.getParameter("userName"));
+		return "createInterview";
+	}
+	
+	@GetMapping("/createInterview")
+	@ResponseBody
+	public String createInterviewRequest(HttpServletRequest request) {
+		String[] exams = request.getParameterValues("exam");
+		String[] orders = request.getParameterValues("order");
+		String[] durations = request.getParameterValues("duration");
+		String[] numQuestions = request.getParameterValues("numOfQuestions");
+		String date = request.getParameter("date");
+		String userName = request.getParameter("userName");
+		String hrName = (String) request.getSession().getAttribute("userName");
+		date=date+" 00:00:00";
+		System.out.println("request date--> "+date);
+		Candidate c = (Candidate) acc.getUser(userName, "a");
+		Hr h = (Hr) acc.getUser(hrName, "h");
+		
+		DateFormat f = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		
+		Date d;
+		try {d = f.parse(date);} 
+		catch (ParseException e) {
+			e.printStackTrace();
+			return "shit";
+		}
+		
+		Interview iv = hrUtility.generateInterview("onGoing", d, c, h);
+		
+		
+		for(int i=0;i<exams.length;i++) {
+			int dr = Integer.parseInt(durations[i]);
+			int nq = Integer.parseInt(numQuestions[i]);
+			int or = Integer.parseInt(orders[i]);
+			System.out.print("request params ---> ");
+			System.out.print(dr);
+			System.out.print(nq);
+			System.out.println(or);
+			UserExam usrEx = hrUtility.generateExam(iv, or, dr, nq, exams[i]);
+		}
+		
+		return "redirect:/home";
 	}
 
 
@@ -205,14 +254,17 @@ public class MainController {
 		Hr hr = new Hr("ali", "mymail1@demo.com", "1234");
 		hrRepo.save(hr);
 		
-		Interview IV = new Interview("?", new Date(0), can, hr);
-		IVRepo.save(IV);
+		DateFormat f = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		String date="2001-02-02 00:00:00";
+		Date d;
+		try {d = f.parse(date);} 
+		catch (ParseException e) {
+			e.printStackTrace();
+			return "shit";
+		}
 		
-		UserExam UE1 = new UserExam(IV, 1, 4, "Java");
-		UserExam UE2 = new UserExam(IV, 1, 4, "PHP");
-		UERepo.save(UE1);
-		UERepo.save(UE2);
-		
+		Interview ivs = new Interview("done", d, can2, hr);
+		IVRepo.save(ivs);
 		
 		Topic T1 = new Topic("OOP", "Java");
 		Topic T2 = new Topic("DB", "Java");
@@ -222,6 +274,15 @@ public class MainController {
 		TRepo.save(T2);
 		TRepo.save(T3);
 		TRepo.save(T4);
+		
+		/*Interview IV = new Interview("?", new Date(0), can, hr);
+		IVRepo.save(IV);
+		
+		UserExam UE1 = new UserExam(IV, 1, 4, "Java");
+		UserExam UE2 = new UserExam(IV, 1, 4, "PHP");
+		UERepo.save(UE1);
+		UERepo.save(UE2);
+		
 		
 		Question Q1 = new Question("Question1J", T1);
 		Question Q2 = new Question("Question2J", T2);
@@ -248,15 +309,24 @@ public class MainController {
 		UEQRepo.save(UEQ1);
 		UEQRepo.save(UEQ2);
 		UEQRepo.save(UEQ3);
-		UEQRepo.save(UEQ4);
+		UEQRepo.save(UEQ4);*/
 
 		return "added";
 	}
 
 
-	@GetMapping("applicants")
-	public String applicants(HttpServletRequest req) {
-		return "applicants";
+	
+	
+	
+	@GetMapping("/exam")
+	@ResponseBody
+	public String tt(HttpServletRequest request) {
+		String[] exams = request.getParameterValues("exams");
+		String[] ps = request.getParameterValues("p");
+		for(int i=0;i<exams.length;i++) {
+			System.out.println(exams[i]+" --- "+ps[i]);
+		}
+		return "doce";
 	}
 
 }

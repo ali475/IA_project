@@ -32,8 +32,8 @@ public class HrUtility {
 		return ivRepo.save(newIv);
 	}
 	
-	public UserExam generateExam(Interview iv, int duration, int numOfQuestions, float totalScore, String examType) {
-		UserExam newExam = new UserExam(iv, duration, numOfQuestions, examType);
+	public UserExam generateExam(Interview iv, int order, int duration, int numOfQuestions, String examType) {
+		UserExam newExam = new UserExam(iv, order, duration, numOfQuestions, examType);
 		return usrExamRepo.save(newExam);
 	}
 	
