@@ -8,10 +8,13 @@ import com.onlineInterview.Repositories.CandidateRepository;
 
 @Service
 public class Candidate_manager {
+	
 	@Autowired
 	private CandidateRepository candidatedb;
 	
-	
+	public Candidate_manager() {}
+
+
 	public boolean login(String user_name, String password) {
 		boolean result = candidatedb.existsById(user_name);
 		if (result) {
@@ -35,13 +38,8 @@ public class Candidate_manager {
 		return false;
 	}
 
-	public boolean isExests(String email) {
-		// TODO Auto-generated method stub
-		return candidatedb.existsById(email);
-	}
-	public Candidate getCandidate(String Email) {
-		return candidatedb.findById(Email).get();
-		
-	}
+	public boolean isExests(String email) {return candidatedb.existsById(email);}
+	
+	public Candidate getCandidate(String Email) {return candidatedb.findById(Email).get();}
 
 }

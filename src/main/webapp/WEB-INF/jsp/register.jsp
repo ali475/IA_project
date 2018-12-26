@@ -38,7 +38,7 @@
             var xhttp;
             var name = document.getElementById("email").value;
             xhttp = new XMLHttpRequest();
-            xhttp.open("GET", "java_page_name?email=" + email, true);
+            xhttp.open("GET", "testemail?email=" + email, true);
             xhttp.send();
             xhttp.onreadystatechange = function ()
             {
@@ -49,13 +49,13 @@
 	</script>
 </head>
 <body>
-	<form name="myForm">
+	<form name="myForm" action="register" method="POST">
 		User name:<input type="text" name="username" id="username" required="true"><br>
 		Email:<input type="email" name="email" id="email" required="true" onchange="AJAX()"><div id="exist"></div>
 		Phone number:<input type="numbers" name="phone" id="phone"><br>
 		Password<input type="password" name="password" id="password" required="true"><br>
 		<input type="submit" value="Register" onclick="validate()">
 	</form>
-	<a href="index.html">i have an account</a>
+	<a href="index">i have an account</a>
 </body>
 </html>

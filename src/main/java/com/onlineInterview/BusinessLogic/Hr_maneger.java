@@ -1,13 +1,19 @@
 package com.onlineInterview.BusinessLogic;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.onlineInterview.Entities.Hr;
 import com.onlineInterview.Repositories.HrRepository;
+
 @Service
 public class Hr_maneger  {
+	
 	@Autowired
 	HrRepository Hr_db;
+	
+	public Hr_maneger() {}
+
 	public boolean login(String user_name, String password) {
 		boolean test = Hr_db.existsById(user_name);
 		if (test) {
