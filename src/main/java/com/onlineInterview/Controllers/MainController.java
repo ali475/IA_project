@@ -2,6 +2,7 @@ package com.onlineInterview.Controllers;
 
 import java.io.File;
 import java.io.IOException;
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,10 +22,20 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.onlineInterview.BusinessLogic.*;
 import com.onlineInterview.Entities.Candidate;
 import com.onlineInterview.Entities.Hr;
+import com.onlineInterview.Entities.Interview;
 import com.onlineInterview.Entities.Position;
+import com.onlineInterview.Entities.Question;
+import com.onlineInterview.Entities.Topic;
+import com.onlineInterview.Entities.UserExam;
+import com.onlineInterview.Entities.UserExamQuestion;
 import com.onlineInterview.Repositories.CandidateRepository;
 import com.onlineInterview.Repositories.HrRepository;
+import com.onlineInterview.Repositories.InterviewRepository;
 import com.onlineInterview.Repositories.PositionRepository;
+import com.onlineInterview.Repositories.QuestionRepository;
+import com.onlineInterview.Repositories.TopicRepository;
+import com.onlineInterview.Repositories.UserExamQuestionRepository;
+import com.onlineInterview.Repositories.UserExamRepository;
 
 @Controller
 public class MainController {
@@ -40,6 +51,17 @@ public class MainController {
 
 	@Autowired
 	PositionRepository posRepo;
+	
+	@Autowired
+	QuestionRepository QRepo;
+	@Autowired
+	TopicRepository TRepo;
+	@Autowired
+	UserExamRepository UERepo;
+	@Autowired
+	UserExamQuestionRepository UEQRepo;
+	@Autowired
+	InterviewRepository IVRepo;
 
 	@Autowired
 	AccountManager acc;
@@ -170,7 +192,7 @@ public class MainController {
 		Position pos2 = new Position("PHP Developer", "Php,oop,larvel");
 		posRepo.save(pos1);
 		posRepo.save(pos2);
-		
+
 		//File f = new File("C:\\Users\\Ali\\Downloads\\PN.pdf");
 		Candidate can = new Candidate("abdo", "01224788990", "mymail@demo.com", "1234", null);
 		can.setPosition(pos1);
@@ -183,8 +205,51 @@ public class MainController {
 		Hr hr = new Hr("ali", "mymail1@demo.com", "1234");
 		hrRepo.save(hr);
 		
+		Interview IV = new Interview("?", new Date(0), can, hr);
+		IVRepo.save(IV);
+		
+		UserExam UE1 = new UserExam(IV, 1, 4, "Java");
+		UserExam UE2 = new UserExam(IV, 1, 4, "PHP");
+		UERepo.save(UE1);
+		UERepo.save(UE2);
 		
 		
+		Topic T1 = new Topic("OOP", "Java");
+		Topic T2 = new Topic("DB", "Java");
+		Topic T3 = new Topic("Connections", "PHP");
+		Topic T4 = new Topic("Basics", "PHP");
+		TRepo.save(T1);
+		TRepo.save(T2);
+		TRepo.save(T3);
+		TRepo.save(T4);
+		
+		Question Q1 = new Question("Question1J", T1);
+		Question Q2 = new Question("Question2J", T2);
+		Question Q3 = new Question("Question1P", T3);
+		Question Q4 = new Question("Question2P", T4);
+		Q1.setCorrect_answers("1#2");
+		Q2.setCorrect_answers("1#2");
+		Q3.setCorrect_answers("1#2");
+		Q4.setCorrect_answers("1#2");
+		Q1.setWrong_answers("3#4#5#6#7");
+		Q2.setWrong_answers("3#4#5#6#7");
+		Q3.setWrong_answers("3#4#5#6#7");
+		Q4.setWrong_answers("3#4#5#6#7");
+
+		QRepo.save(Q1);
+		QRepo.save(Q2);
+		QRepo.save(Q3);
+		QRepo.save(Q4);
+		
+		UserExamQuestion UEQ1 = new UserExamQuestion(UE1, Q1);
+		UserExamQuestion UEQ2 = new UserExamQuestion(UE1, Q2);
+		UserExamQuestion UEQ3 = new UserExamQuestion(UE2, Q3);
+		UserExamQuestion UEQ4 = new UserExamQuestion(UE2, Q4);
+		UEQRepo.save(UEQ1);
+		UEQRepo.save(UEQ2);
+		UEQRepo.save(UEQ3);
+		UEQRepo.save(UEQ4);
+
 		return "added";
 	}
 
