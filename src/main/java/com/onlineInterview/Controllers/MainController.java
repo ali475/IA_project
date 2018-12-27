@@ -7,7 +7,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
-import java.util.TimeZone;
+import java.util.Set;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -20,15 +20,15 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.onlineInterview.BusinessLogic.*;
+import com.onlineInterview.BusinessLogic.AccountManager;
+import com.onlineInterview.BusinessLogic.HrUtility;
+import com.onlineInterview.BusinessLogic.SystemUtility;
 import com.onlineInterview.Entities.Candidate;
 import com.onlineInterview.Entities.Hr;
 import com.onlineInterview.Entities.Interview;
 import com.onlineInterview.Entities.Position;
-import com.onlineInterview.Entities.Question;
 import com.onlineInterview.Entities.Topic;
 import com.onlineInterview.Entities.UserExam;
-import com.onlineInterview.Entities.UserExamQuestion;
 import com.onlineInterview.Repositories.CandidateRepository;
 import com.onlineInterview.Repositories.HrRepository;
 import com.onlineInterview.Repositories.InterviewRepository;
@@ -180,7 +180,6 @@ public class MainController {
 	}
 	
 	@GetMapping("/createInterview")
-	@ResponseBody
 	public String createInterviewRequest(HttpServletRequest request) {
 		String[] exams = request.getParameterValues("exam");
 		String[] orders = request.getParameterValues("order");
@@ -218,6 +217,15 @@ public class MainController {
 		}
 		
 		return "redirect:/home";
+	}
+	
+	@GetMapping("/myInterviews")
+	public String getUserInterviews(HttpServletRequest request) {
+		String usrName = (String)request.getSession().getAttribute("userName");
+		Candidate can = canRepo.findById(usrName).get();
+		Set<Interview> ivs = can.getInterviews();
+		request.setAttribute("ivs", ivs);
+		return "myInterview";
 	}
 
 
