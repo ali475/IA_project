@@ -11,5 +11,6 @@ public interface TopicRepository extends CrudRepository<Topic, String> {
 	
 	@Query("SELECT DISTINCT t.examType FROM Topic t")
 	List<String> findExamTypes();
+	
 
 }

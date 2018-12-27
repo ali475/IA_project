@@ -27,18 +27,16 @@
 
 	</div>
 
-	<div class="positions-con">
+	<div class="">
 			
 		<%  for(int i=0;i<ivs.size();i++) { %>
-			<div class="position">
+			<div class="">
 				<div>
-            	<a class="position-link" href="apply?pName=<%=positions.get(i).getPositionName()%>">
-					<%out.print(ivs.get(i).getId();%> 
+            	<a class="" href="exams?iv_Id=<%=ivs.get(i).getId()%>">
+					<%out.print(ivs.get(i).getId());%> 
 				</a>
 				</div>
-				<div class="position-info">
-				<h6> <%out.print(ivs.get(i).getId();%> </h6>
-				</div>
+
 			</div>
 		<% } %>
 

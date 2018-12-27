@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Set;
@@ -29,6 +30,7 @@ import com.onlineInterview.Entities.Interview;
 import com.onlineInterview.Entities.Position;
 import com.onlineInterview.Entities.Topic;
 import com.onlineInterview.Entities.UserExam;
+import com.onlineInterview.Entities.UserExamQuestion;
 import com.onlineInterview.Repositories.CandidateRepository;
 import com.onlineInterview.Repositories.HrRepository;
 import com.onlineInterview.Repositories.InterviewRepository;
@@ -223,10 +225,29 @@ public class MainController {
 	public String getUserInterviews(HttpServletRequest request) {
 		String usrName = (String)request.getSession().getAttribute("userName");
 		Candidate can = canRepo.findById(usrName).get();
-		Set<Interview> ivs = can.getInterviews();
+		Set<Interview> data = can.getInterviews();
+		List <Interview> ivs = new ArrayList<>();
+		for (Interview e : data) {ivs.add(e);}
 		request.setAttribute("ivs", ivs);
 		return "myInterview";
 	}
+	
+	@GetMapping("/exams")
+	public String getExam(HttpServletRequest request) {
+		int iv_id = Integer.parseInt((String)request.getParameter("iv_Id"));
+		List<UserExam> exams = systemUtility.getIvExams(iv_id); 
+		request.setAttribute("exams", exams);
+		return "exams";
+	}
+	
+	@GetMapping("/examQuestions")
+	public String getExamQuestions(HttpServletRequest request) {
+		String examId = (String)request.getParameter("examId");
+		int id = Integer.parseInt(examId);
+		List<UserExamQuestion> examQuestions = systemUtility.getUserExamQuestions(id);
+		return "ay7aga";
+	}
+	
 
 
 	@PostMapping("/upload")

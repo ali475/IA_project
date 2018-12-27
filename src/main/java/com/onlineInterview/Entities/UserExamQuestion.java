@@ -25,8 +25,10 @@ public class UserExamQuestion {
 	@ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "question_id")
 	private Question userQuestion;
+	
 	@Column(columnDefinition="text")
 	private String userAnwser;
+	
 	public UserExamQuestion() {}
 
 	public UserExamQuestion(UserExam userExam, Question userQuestion) {

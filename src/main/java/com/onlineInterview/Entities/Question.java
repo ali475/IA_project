@@ -28,8 +28,10 @@ public class Question {
 	
 	@OneToMany(mappedBy = "userQuestion", cascade = CascadeType.ALL,fetch = FetchType.EAGER)
 	private Set<UserExamQuestion> userExamQuestions;
+	
 	@Column(columnDefinition="text")
 	private String correct_answers;
+	
 	@Column(columnDefinition="text")
 	private String wrong_answers;
 	

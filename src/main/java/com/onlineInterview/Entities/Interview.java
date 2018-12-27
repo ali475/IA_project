@@ -89,13 +89,13 @@ public class Interview {
 		this.hr = hr;
 	}
 
-	//public Set<UserExam> getUserExams() {
-		//return userExams;
-	//}
+	public Set<UserExam> getUserExams() {
+		return userExams;
+	}
 
-	//public void setUserExams(Set<UserExam> userExams) {
-	//	this.userExams = userExams;
-	//}
+	public void setUserExams(Set<UserExam> userExams) {
+		this.userExams = userExams;
+	}
 	
 	
 	
