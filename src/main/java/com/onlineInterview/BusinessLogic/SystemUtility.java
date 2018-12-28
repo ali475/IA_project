@@ -1,7 +1,6 @@
 package com.onlineInterview.BusinessLogic;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 import java.util.Set;
@@ -114,6 +113,7 @@ public class SystemUtility {
 		Iterable <Topic> _Topics = T_repository.findAll();
 		List<Question>Questions = new ArrayList<>();
 		for(Topic t :_Topics) {
+			
 			for(Question q :t.getQuestions()) {
 				Questions.add(q);
 			}
@@ -134,9 +134,9 @@ public class SystemUtility {
 		List<Question>randomQestions = new ArrayList<>();
 		for (int i = 0; i < numOfQuestions; i++) {
 			System.out.println("");
-			//int index = rand.nextInt(questions.size());
+			int index = rand.nextInt(questions.size());
 			randomQestions.add(questions.get(i));
-			//questions.remove(i);
+			questions.remove(i);
 			
 		}
 		return randomQestions;
