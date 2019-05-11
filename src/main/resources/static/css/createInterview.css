@@ -1,0 +1,17 @@
+body,html { 
+	margin: 0px;
+}
+
+.ivForm{
+    padding: 8px;
+}
+
+.date{
+width: fit-content;
+margin: 10px auto;
+}
+
+.submitIv{
+    width: fit-content;
+margin: 10px auto;
+}
